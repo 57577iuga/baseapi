@@ -1,0 +1,16 @@
+<?php 
+$url = "http://callback-URL/itemdata.json";
+$json = file_get_contents($url);
+$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+$arr = json_decode($json,true);
+
+print<<<EOT
+<p>
+/* 商品URL */
+<h1><a href ="https://your_base_URL/items/{$arr["items"][0]["item_id"]}">{$arr["items"][0]["title"]}</a></h1>
+</p>
+  <div>
+		<a href="https://your_base_URL/items/{$arr["items"][0]["item_id"]}"><img src="{$arr["items"][0]["img1_origin"]}" width="300px"  class="cir_img"></a>
+  </div>
+EOT;
+?>
